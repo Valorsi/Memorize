@@ -1,32 +1,58 @@
 <?php 
 
 Route::set('profile', function() {
-    echo "userProfile";
+    
     profile::createView('profile');
+    profile::displayUserMemos();
 });
 
 Route::set('home', function() {
-    echo "home";
+    
     home::createView('home');
-    home::isLoggedIn();
+    home::displayPublicMemos();
 });
 
 Route::set('admin-dashboard', function() {
-    echo "admins only";
+    
     admin::createView('admin');
 });
 
 Route::set('register', function() {
-    echo "Registration";
+    
     register::createView('register');
     register::registerUser();
 });
 
 Route::set('login', function() {
-    echo "Login";
+    
     login::createView('login');
     login::userLogin();
 });
+
+Route::set('logout', function() {
+    
+    logout::userLogout();
+    logout::createView('logout');
+
+});
+
+Route::set('create-memo', function(){
+    profile::createView('createMemo');
+    profile::createMemo();
+});
+
+Route::set('edit-memo', function(){
+    profile::createView('editMemo');
+    profile::editMemo();
+    profile::getMemo('editMemo');
+
+});
+
+Route::set('delete-memo', function(){
+    profile::createView('deleteMemo');
+    profile::deleteMemo();
+    profile::getMemo('deleteMemo');
+})
 
 
 ?>

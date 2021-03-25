@@ -1,0 +1,9 @@
+<form action="edit-memo?memo={memoId}" method="POST">
+    <input type="text" name="title" placeholder="Title your Memo..." value="{memoTitle}">
+    <textarea rows="5" cols="50" name="body" placeholder="Note to self:..." value="">{memoBody}</textarea>
+    <select name="audience" >
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+    </select>
+    <input type="submit" name="edit-memo">
+</form>

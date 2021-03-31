@@ -30,8 +30,13 @@ class register extends Controller {
                 $errMessage = "Email address is not valid!";
                 $registerError = True;
 
+            //Check if name fields are empty
+            } else if (empty($firstName) || empty($lastName)) {
+                $errMessage = "Name field cannot be Empty!";
+                $registerError = True;
+
             //Check if Passwords match
-            } else if ($password !== $passwordConfirm) {
+            }else if ($password !== $passwordConfirm) {
                 $errMessage = "Passwords don't match!";
                 $registerError = True;
 
@@ -53,12 +58,12 @@ class register extends Controller {
 
             //If there is an error, echo the error Message
             if ($registerError) {
-                echo $errMessage;
+                controller::displayError('There was a problem...', $errMessage);
 
             //Else proceed with the SQL Query
             } else if (!$registerError) {
                 database::query("INSERT INTO users VALUES ('', :firstName, :lastName, :password, :email, 'user')", array(":firstName"=>$firstName, ":lastName"=>$lastName, ":password"=>password_hash($password, PASSWORD_DEFAULT ), ":email"=>$email));
-                echo "Registration Successfull, continue to <a href='localhost/memorize/login'>login</a>!";
+                header('location:http://localhost/memorize/login');
 
             }
 

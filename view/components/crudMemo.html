@@ -1,12 +1,19 @@
-<div class="memoWrapper">
-    <div class="memoBody">
-        <h1 class="memoTitle">
+<div class="memo-wrapper col-lg-4 col-md-6 col-sm-12 col-xl-2">
+    <div class="memo-body">
+        <h4 class="memo-title">
             {memoTitle}
-        </h1>
-        <p class="memoText" >{memoText}</p>
+        </h4>
+        <p class="memo-text" >{memoText}</p>
     </div>
-    <div class="crudWrapper">
-        <a class="crudEdit" href="https://localhost/memorize/edit-memo?memo={memoId}">Edit</a>
-        <a class="crudDelete" href="https://localhost/memorize/delete-memo?memo={memoId}">Delete</a>
+    <div class="crud-wrapper">
+        <div class="crud-buttons">
+            <a href="https://localhost/memorize/edit-memo?memo={memoId}"> <img class="small-icon" src="./img/memoedit.png" alt=""></a>
+            <a href="https://localhost/memorize/edit-memo?memo={memoId}" class="accent">Edit</a>
+        </div>
+
+        <div class="crud-buttons">
+            <a href="https://localhost/memorize/delete-memo?memo={memoId}"><img class="small-icon" src="./img/memodelete.png" alt=""></a>
+            <a href="https://localhost/memorize/delete-memo?memo={memoId}" class="danger">Delete</a>
+        </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ class home extends Controller {
 
 
         //prepare memoHtml variable and get the html for the memo's
-        $memoHtml = '<div class="memoContainer">';
+        $memoHtml = '<div class="memoContainer row">';
         $memoSkeleton = file_get_contents('./view/components/memo.html');
 
         foreach($memos as $memo){
@@ -28,6 +28,14 @@ class home extends Controller {
         //Echo the HTML 
         echo $memoHtml;
         
+    }
+
+    public static function redirectOffline() {
+        if(login::isLoggedIn()) {
+
+        } else {
+            header('location:http://localhost/memorize/login');
+        }
     }
 
 }

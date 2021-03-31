@@ -31,13 +31,12 @@ class login extends Controller {
                     setcookie("MID", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
 
                 } else {
-                    echo "Wrong Password!";
-                    
+                    controller::displayError('Incorrect Password', 'Please double check your spelling!');
                 }
 
 
                 } else {
-                    echo "User is not Registered! Please register <a href='localhost/memorize/register'>here</a>.";
+                    controller::displayError('User is not Registered', "Please register <a href='http://localhost/memorize/register'>here</a>.");
                 }
 
                 header('location:http://localhost/memorize/home');

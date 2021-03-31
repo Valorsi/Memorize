@@ -12,7 +12,7 @@ class profile extends Controller {
 
 
             //prepare memoHtml variable and get the html for the memo's
-            $memoHtml = '<div class="memoContainer">';
+            $memoHtml = '<div class="memo-container row">';
             $memoSkeleton = file_get_contents('./view/components/crudMemo.html');
 
             foreach($memos as $memo){
@@ -59,10 +59,10 @@ class profile extends Controller {
 
                 //Check if length of title and Body are exceeded
                 if(strlen($body) > 150 || strlen($body) < 1) {
-                    echo "Length of memo must not exceed 150 characters";
+                    controller::displayError('Incorrect Length', 'Length of memo must not exceed 150 characters');
                     
                 } else if (strlen($title) > 60 || strlen($title) <1 ){
-                    echo "Length of Title must not exceed 60 characters";
+                    controller::displayError('Incorrect Length', 'Length of title must not exceed 60 characters');
 
                 //if lengths are in order then proceed with creation and redirect to profile
                 } else {
@@ -128,10 +128,10 @@ class profile extends Controller {
             
                     //Check if length of title and Body are exceeded
                         if(strlen($body) > 150 || strlen($body) < 1) {
-                            echo "Length of memo must not exceed 150 characters";
+                            controller::displayError('Incorrect Length', 'Length of memo must not exceed 150 characters');
                                 
                         } else if (strlen($title) > 60 || strlen($title) <1 ){
-                            echo "Length of Title must not exceed 60 characters";
+                            controller::displayError('Incorrect Length', 'Length of title must not exceed 60 characters');
             
                         //if lengths are in order then proceed with update and redirect to profile
                         } else {
@@ -185,6 +185,25 @@ class profile extends Controller {
 
     public static function deleteAccount(){
 
+                    //if user is logged in proceed, else send them to login
+                    if(login::isLoggedIn()){
+                
+                        //if user clicked submit proceed
+                        if(isset($_POST['delete-account'])) {
+                            
+                            //grab the user's id and proceed to deletion
+                            $userId = login::isLoggedIn();
+                            
+                            database::query("DELETE FROM login_tokens WHERE fk_users_id = :userId", array(':userId'=>$userId));
+                            database::query("DELETE FROM users WHERE users_id = :userId", array(':userId'=>$userId));
+
+                            header('location:http://localhost/memorize/login');
+                    
+                        }
+                    
+                    } else {
+                        header('location:http://localhost/memorize/login');
+                }
     }
 
 

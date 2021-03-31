@@ -1,15 +1,20 @@
 
-<div class="memoWrapper">
-    <div class="memoBody">
-        <h1 class="memoTitle">
-            {memoTitle}
-        </h1>
-        <p class="memoText">{memoBody}</p>
+<div class="form-container">
+    <div class="form-wrapper">
+        <div class="memo-wrapper">
+            <div class="memo-body">
+                <h4 class="memo-title">
+                    {memoTitle}
+                </h4>
+                <p class="memo-text">{memoBody}</p>
+            </div>
+    </div>
+
+
+        <form action="delete-memo?memo={memoId}" method="POST">
+            <a href="http://localhost/memorize/profile">No, go back</a>
+            <input type="submit" name="delete-memo" class="form-item form-danger">
+        </form>
     </div>
 </div>
 
-
-<form action="delete-memo?memo={memoId}" method="POST">
-    <a href="http://localhost/memorize/profile">No, go back</a>
-    <input type="submit" name="delete-memo">
-</form>

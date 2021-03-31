@@ -3,10 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="style/style.css">
-</head>
-<body>
+    <?php include('components/includes.php')?>
 
+</head>
+    <?php include('components/navbar.html')?>
+<body>
+<h1 class="accent m-5">Browse public Memo's</h1>
 
 </body>
 </html>

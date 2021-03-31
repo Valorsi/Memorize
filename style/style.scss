@@ -1,4 +1,183 @@
-* {
-    background-color:black;
-    color:red;
+$main : rgb(0,50,130);
+$accent: #F29900;
+$dark : rgb(0,21,40);
+$danger : #AD0029;
+
+
+body {
+    background-color:$main !important;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:black;
+    overflow-x:hidden;
+}
+
+.navbar {
+    background-color: $dark;
+    display:flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right:20px;
+}
+
+.navbar-items {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+#logo {
+    width:146.5px;
+    height:146.5px;
+}
+
+.nav-icon {
+    width:73.25px;
+    height:73.25px;
+}
+
+
+.item-wrapper > a {
+    text-decoration: none;
+    color:white;
+}
+
+a:hover{
+    color:$accent !important;
+}
+
+
+#logo {
+    width:146.5px;
+    height:146.5px;
+}
+
+.accent {
+    color: $accent;
+}
+
+.danger {
+    color:$danger !important;
+}
+
+.memo-container {
+    width:100%;
+    display:flex;
+    justify-content: row;
+}
+
+
+.memo-body {
+    padding-top:40px;
+    padding-left:25px;
+    padding-right:25px;
+    padding-bottom:40px;
+    width:283px;
+    height:283px ;
+    background-image: url('../img/memo2.png');
+    background-position:center;
+    background-size:cover;
+}
+
+.memo-title {
+    padding:0;
+    margin-bottom:0;
+}
+
+.memo-text {
+    margin-top:0;
+    word-wrap:break-word;
+}
+
+.form-container {
+    display:flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+
+.form-wrapper {
+    width:600px;
+    background-color: white;
+    padding:40px;
+}
+
+form>* {
+    display:block;
+    padding:10px;
+}
+
+label {
+    font-size:20px;
+}
+
+.form-item {
+    width:100%;
+    background-color:white;
+    border: 2px $dark solid;
+}
+
+.form-item:hover, .form-item:focus {
+    background-color:$dark;
+    color:white;
+    border: 2px $dark double;
+}
+
+.form-danger{
+    border: 2px $danger solid;
+}
+
+.form-danger:hover, .form-danger:focus{
+    background-color:$danger;
+}
+
+.small-icon {
+    width:70px;
+    height:70px;
+}
+
+.crud-wrapper {
+    padding:5px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.crud-buttons>* {
+    display:block;
+    text-align:center;
+}
+
+.table-container {
+    display:flex;
+    justify-content: center;
+    margin:30px;
+}
+.admin-dashboard {
+    background-color: white;
+}
+
+.admin-dashboard>tbody>tr {
+    border: 1px solid $dark;
+}
+
+.admin-dashboard>tbody>tr>td, .admin-dashboard>tbody>tr>th  {
+    padding: 10px;
+    border: 1px solid $dark;
+}
+
+tr:nth-child(odd) {
+    background-color:rgb(100,150,200);
+}
+
+.error-container {
+    position:absolute;
+    width:400px;
+    top:40%;
+    left:40%;
+    z-index:3;
+    background-color: white;
+    padding:30px;
+    border: $dark 1px solid;
+}
+
+.info-text {
+    font-size:14px !important;
 }

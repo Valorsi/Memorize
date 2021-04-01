@@ -1,6 +1,10 @@
 <?php
+
+require_once('controller.php');
 class admin extends Controller {
     
+
+    // Function checks if current user is an Admin. 
     public static function isAdmin() {
         
         //Check if user is logged in
@@ -14,12 +18,12 @@ class admin extends Controller {
 
             //if they are not an admin they will be redirected 
             } else {
-                header('location:http://localhost/memorize/home');
+                controller::redirectTo('home');
             }
         
         //if they are not logged in they will be redirected
         } else {
-            header('location:http://localhost/memorize/home');
+            controller::redirectTo('home');
         }
 
         
@@ -27,6 +31,8 @@ class admin extends Controller {
 
     }
 
+
+    // Function creates Admin Dashboard from fetched user Data. and Echoes the HTML on to the page.
     public static function getAdminDashboard() {
 
         if(admin::isAdmin()) {
@@ -35,7 +41,7 @@ class admin extends Controller {
 
             $tableHtml = "<div class='table-container'><table class='admin-dashboard'><tr><th>Full Name</th><th>E-mail</th><th>Role</th><th>Actions</th></tr>";
             $tableEnd = "</table></div>";
-            $tableRow = file_get_contents('./view/components/dashboardUser.html');
+            $tableRow = controller::curl_file_get_contents('http://boris.codefactory.live/memorize/view/components/dashboardUser.html');
 
             foreach($userList as $u) {
                 
@@ -59,12 +65,14 @@ class admin extends Controller {
 
     }
 
+
+    //Get's the User's ID, first name, last name ,email and loads them into the HTML Forms for Upgrade/Ban functions.
     public static function getUser($mode) {
 
         $userId = $_GET['userId'];
 
         $userData = database::query("SELECT users_id, first_name, last_name, email FROM users WHERE users_id = :userId", array(":userId"=>$userId));
-        $userSkeleton = file_get_contents("http://localhost/memorize/view/components/".$mode.".html");
+        $userSkeleton = controller::curl_file_get_contents("http://boris.codefactory.live/memorize/view/components/".$mode.".html");
 
 
         $userPrep = str_replace('{firstName}', $userData[0]['first_name'], $userSkeleton);
@@ -77,6 +85,8 @@ class admin extends Controller {
 
     }
 
+
+    // Function Upgrades user to Admin Status
     public static function upgradeUser() {
 
         if(admin::isAdmin()) {
@@ -89,7 +99,7 @@ class admin extends Controller {
                     
                     database::query("UPDATE users SET `role` = 'admin' WHERE users_id = :userId", array(":userId"=>$userId));
 
-                    header("location:http://localhost/memorize/admin-dashboard");
+                    controller::redirectTo("admin-dashboard");
 
                 } else {
                     controller::displayError('Oops', 'Something went wrong, try again later?');
@@ -99,6 +109,7 @@ class admin extends Controller {
 
     }
 
+    // Function deletes a user and their login tokens from the dabatase
     public static function banUser() {
 
         if(admin::isAdmin()) {
@@ -112,7 +123,7 @@ class admin extends Controller {
                     database::query("DELETE FROM users WHERE users_id = :userId", array(":userId"=>$userId));
                     database::query("DELETE FROM login_tokens WHERE fk_users_id = :userId", array(":userId"=>$userId));
 
-                    header("location:http://localhost/memorize/admin-dashboard");
+                    controller::redirectTo("admin-dashboard");
 
                 } else {
                     controller::displayError('Oops', 'Something went wrong, try again later?');

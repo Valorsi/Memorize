@@ -2,10 +2,10 @@
 
 class database {
 
-    public static $host = "127.0.0.1";
-    public static $db_name = "memorize";
-    public static $username = 'root';
-    public static $password = '';
+    public static $host = "localhost";
+    public static $db_name = "boriscod_memorize";
+    public static $username = 'boriscod_borisadmin';
+    public static $password = 'Antegamhsou1!';
 
 
     private static function connect() {

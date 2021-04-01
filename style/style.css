@@ -1,12 +1,12 @@
 body {
-  background-color: #003282 !important;
+  background-color: #202833 !important;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: black;
   overflow-x: hidden;
 }
 
 .navbar {
-  background-color: #001528;
+  background-color: #0B0C10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,7 +42,7 @@ body {
 }
 
 a:hover {
-  color: #F29900 !important;
+  color: #66FCF1 !important;
 }
 
 #logo {
@@ -51,25 +51,33 @@ a:hover {
 }
 
 .accent {
-  color: #F29900;
+  color: #66FCF1;
 }
 
 .danger {
   color: #AD0029 !important;
 }
 
+.caution {
+  color: #F29900;
+}
+
+.dark {
+  color: #0B0C10;
+}
+
 .memo-container {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: row;
-      -ms-flex-pack: row;
-          justify-content: row;
+  width: 70%;
+  margin-left: 15% !important;
+  margin-bottom: 100px !important;
+  background-image: url("../img/cork.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  border: 10px inset #d6986e;
 }
 
 .memo-body {
-  padding-top: 40px;
+  padding-top: 50px;
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 40px;
@@ -78,11 +86,44 @@ a:hover {
   background-image: url("../img/memo2.png");
   background-position: center;
   background-size: cover;
+  margin: 0;
+  position: relative;
+}
+
+.pin {
+  position: absolute;
+  top: 20px;
+  left: 141px;
+}
+
+.memo-inner {
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.memo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.crud-memo-wrapper {
+  display: block;
+}
+
+.crud-buttons {
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .memo-title {
   padding: 0;
   margin-bottom: 0;
+  word-wrap: break-word;
 }
 
 .memo-text {
@@ -118,13 +159,13 @@ label {
 .form-item {
   width: 100%;
   background-color: white;
-  border: 2px #001528 solid;
+  border: 2px #0B0C10 solid;
 }
 
 .form-item:hover, .form-item:focus {
-  background-color: #001528;
+  background-color: #0B0C10;
   color: white;
-  border: 2px #001528 double;
+  border: 2px #0B0C10 double;
 }
 
 .form-danger {
@@ -133,6 +174,10 @@ label {
 
 .form-danger:hover, .form-danger:focus {
   background-color: #AD0029;
+}
+
+.countdown {
+  border: 2px #0B0C10 solid;
 }
 
 .small-icon {
@@ -171,12 +216,12 @@ label {
 }
 
 .admin-dashboard > tbody > tr {
-  border: 1px solid #001528;
+  border: 1px solid #0B0C10;
 }
 
 .admin-dashboard > tbody > tr > td, .admin-dashboard > tbody > tr > th {
   padding: 10px;
-  border: 1px solid #001528;
+  border: 1px solid #0B0C10;
 }
 
 tr:nth-child(odd) {
@@ -191,7 +236,7 @@ tr:nth-child(odd) {
   z-index: 3;
   background-color: white;
   padding: 30px;
-  border: #001528 1px solid;
+  border: #0B0C10 1px solid;
 }
 
 .info-text {

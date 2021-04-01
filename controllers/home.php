@@ -1,14 +1,17 @@
 <?php
+require_once('controller.php');
+
 class home extends Controller {
     
+    //Gets all public memos and loads the data from them into HTML, then displays them.
     public static function displayPublicMemos(){
 
         $memos = database::query('SELECT memo_title, memo_text FROM memo WHERE audience=:audience', array(":audience"=>"public"));
 
 
         //prepare memoHtml variable and get the html for the memo's
-        $memoHtml = '<div class="memoContainer row">';
-        $memoSkeleton = file_get_contents('./view/components/memo.html');
+        $memoHtml = '<div class="memo-container row">';
+        $memoSkeleton = controller::curl_file_get_contents('http://boris.codefactory.live/memorize/view/components/memo.html');
 
         foreach($memos as $memo){
             //reset memoPrep to standard html for the memo
@@ -30,11 +33,13 @@ class home extends Controller {
         
     }
 
+
+    //Redirects users who are not logged in to the login page.
     public static function redirectOffline() {
         if(login::isLoggedIn()) {
 
         } else {
-            header('location:http://localhost/memorize/login');
+            controller::redirectTo('login');
         }
     }
 

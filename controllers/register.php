@@ -1,7 +1,8 @@
 <?php
+require_once('controller.php');
 class register extends Controller {
 
-    
+    //Function takes POST data, and registers new user.
      public static function registerUser() {
          
         if(isset($_POST['register'])) {
@@ -47,7 +48,7 @@ class register extends Controller {
 
             //Check if email is already registered
             } else if ( database::query("SELECT email FROM users WHERE email=:email", array(':email'=>$email))) {
-                $errMessage = "Email already registered, continue to <a href='localhost/memorize/login'>login</a>";
+                $errMessage = "Email already registered, continue to <a href='http://boris.codefactory.live/memorize/login'>login</a>";
                 $registerError = True;
 
             //if all checks pass Set registerError to False
@@ -59,11 +60,12 @@ class register extends Controller {
             //If there is an error, echo the error Message
             if ($registerError) {
                 controller::displayError('There was a problem...', $errMessage);
+                die();
 
             //Else proceed with the SQL Query
             } else if (!$registerError) {
-                database::query("INSERT INTO users VALUES ('', :firstName, :lastName, :password, :email, 'user')", array(":firstName"=>$firstName, ":lastName"=>$lastName, ":password"=>password_hash($password, PASSWORD_DEFAULT ), ":email"=>$email));
-                header('location:http://localhost/memorize/login');
+                database::query("INSERT INTO users (first_name, last_name, password, email, role) VALUES (:firstName, :lastName, :password, :email, 'user')", array(":firstName"=>$firstName, ":lastName"=>$lastName, ":password"=>password_hash($password, PASSWORD_DEFAULT ), ":email"=>$email));
+                controller::redirectTo('login');
 
             }
 

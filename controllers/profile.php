@@ -1,7 +1,8 @@
 <?php
+require_once('controller.php');
 class profile extends Controller {
 
-
+    //Takes the data from the User's Created memo's and loads them into HTML. This function displays both private and public memos.
     public static function displayUserMemos() {
 
         if(login::isLoggedIn()) {
@@ -13,7 +14,7 @@ class profile extends Controller {
 
             //prepare memoHtml variable and get the html for the memo's
             $memoHtml = '<div class="memo-container row">';
-            $memoSkeleton = file_get_contents('./view/components/crudMemo.html');
+            $memoSkeleton = controller::curl_file_get_contents('http://boris.codefactory.live/memorize/view/components/crudMemo.html');
 
             foreach($memos as $memo){
                 //reset memoPrep to standard html for the memo
@@ -38,11 +39,13 @@ class profile extends Controller {
             echo $memoHtml;
 
         } else {
-            header("location:http://localhost/memorize/home");
+            controller::redirectTo("home");
         }
 
     }
 
+
+    //Function takes data from POST and creates a database entry for a new Memo.
     public static function createMemo(){
 
         //if user is logged in proceed, else send them to login
@@ -59,25 +62,26 @@ class profile extends Controller {
 
                 //Check if length of title and Body are exceeded
                 if(strlen($body) > 150 || strlen($body) < 1) {
-                    controller::displayError('Incorrect Length', 'Length of memo must not exceed 150 characters');
+                    controller::displayError('Incorrect Length', 'Memo must not be empty or exceed 150 characters.');
                     
-                } else if (strlen($title) > 60 || strlen($title) <1 ){
-                    controller::displayError('Incorrect Length', 'Length of title must not exceed 60 characters');
+                } else if (strlen($title) > 40 || strlen($title) <1 ){
+                    controller::displayError('Incorrect Length', 'Title must not be empty or exceed 40 characters.');
 
                 //if lengths are in order then proceed with creation and redirect to profile
                 } else {
-                    database::query("INSERT INTO memo VALUES ('', :title, :body, :audience, :user)", array(":title"=>$title, ":body"=>$body, ":audience"=>$audience, ":user"=>$userId));
-                    header('location:http://localhost/memorize/profile');
+                    database::query("INSERT INTO memo (memo_title, memo_text, audience, fk_user) VALUES (:title, :body, :audience, :user)", array(":title"=>$title, ":body"=>$body, ":audience"=>$audience, ":user"=>$userId));
+                    controller::redirectTo('profile');
                 }
 
 
                 }
 
         } else {
-            header('location:http://localhost/memorize/login');
+            controller::redirectTo('login');
         }
     }
 
+    //Function takes data from GET and loads a specific memo into form HTML. Is used for Editing and Deleting memo's.
     public static function getMemo($file){
 
         $memoId = $_GET['memo'];
@@ -93,7 +97,7 @@ class profile extends Controller {
                 if(database::query("SELECT fk_user FROM memo WHERE memo_id = :memoId", array(":memoId"=>$memoId))[0][0] == $userId) {
 
                     $memoData = database::query("SELECT memo_title, memo_text FROM memo WHERE memo_id = :memoId", array(":memoId"=>$memoId));
-                    $memoSkeleton = file_get_contents("http://localhost/memorize/view/components/".$file.".html");
+                    $memoSkeleton = controller::curl_file_get_contents("http://boris.codefactory.live/memorize/view/components/".$file.".html");
 
                     $memoPrep = str_replace('{memoTitle}', $memoData[0]['memo_title'], $memoSkeleton);
                     $memoPrep = str_replace('{memoBody}', $memoData[0]['memo_text'], $memoPrep);
@@ -104,10 +108,11 @@ class profile extends Controller {
                 }
             }
         } else {
-            header('location:http://localhost/memorize/home');
+            controller::redirectTo('home');
         }
     }
 
+    //Function takes data from POST and UPDATES memo according to the data given. 
     public static function editMemo(){
     
             //if user is logged in proceed, else send them to login
@@ -128,29 +133,30 @@ class profile extends Controller {
             
                     //Check if length of title and Body are exceeded
                         if(strlen($body) > 150 || strlen($body) < 1) {
-                            controller::displayError('Incorrect Length', 'Length of memo must not exceed 150 characters');
+                            controller::displayError('Incorrect Length', 'Memo must not be empty or exceed 150 characters.');
                                 
-                        } else if (strlen($title) > 60 || strlen($title) <1 ){
-                            controller::displayError('Incorrect Length', 'Length of title must not exceed 60 characters');
+                        } else if (strlen($title) > 40 || strlen($title) <1 ){
+                            controller::displayError('Incorrect Length', 'Title must not be empty or exceed 40 characters.');
             
                         //if lengths are in order then proceed with update and redirect to profile
                         } else {
                             database::query("UPDATE memo SET memo_title = :title, memo_text = :body, audience = :audience WHERE memo_id = :memoId", array(":title"=>$title, ":body"=>$body, ":audience"=>$audience, ":memoId"=>$memoId));
-                            header('location:http://localhost/memorize/profile');
+                            controller::redirectTo('profile');
                         }
 
                     //if user is not the one who posted the memo send them back to home
                     } else {
-                        header("location:http://localhost/memorize/home");
+                        controller::redirectTo("home");
                     }
             
                 }
             
             } else {
-                header('location:http://localhost/memorize/login');
+                controller::redirectTo('login');
         }
     }
 
+    //Function deletes Memo.
     public static function deleteMemo(){
 
                     //if user is logged in proceed, else send them to login
@@ -168,21 +174,22 @@ class profile extends Controller {
 
                                 database::query("DELETE FROM memo WHERE memo_id = :memoId", array(':memoId'=>$memoId));
 
-                                header('location:http://localhost/memorize/profile');
+                                controller::redirectTo('profile');
                                 
         
                             //if user is not the one who posted the memo send them back to home
                             } else {
-                                header("location:http://localhost/memorize/home");
+                                controller::redirectTo('home');
                             }
                     
                         }
                     
                     } else {
-                        header('location:http://localhost/memorize/login');
+                        controller::redirectTo('login');
                 }
     }
 
+    //Function enables user to delete their account.
     public static function deleteAccount(){
 
                     //if user is logged in proceed, else send them to login
@@ -197,12 +204,12 @@ class profile extends Controller {
                             database::query("DELETE FROM login_tokens WHERE fk_users_id = :userId", array(':userId'=>$userId));
                             database::query("DELETE FROM users WHERE users_id = :userId", array(':userId'=>$userId));
 
-                            header('location:http://localhost/memorize/login');
+                            controller::redirectTo('login');
                     
                         }
                     
                     } else {
-                        header('location:http://localhost/memorize/login');
+                        controller::redirectTo('login');
                 }
     }
 

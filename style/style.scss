@@ -1,11 +1,12 @@
-$main : rgb(0,50,130);
-$accent: #F29900;
-$dark : rgb(0,21,40);
+$main : #202833;
+$accent: #66FCF1;
+$dark : #0B0C10;
 $danger : #AD0029;
+$caution : #F29900;
 
 
 body {
-    background-color:$main !important;
+    background-color: $main !important;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color:black;
     overflow-x:hidden;
@@ -58,15 +59,28 @@ a:hover{
     color:$danger !important;
 }
 
+.caution {
+    color:$caution;
+}
+
+.dark {
+    color:$dark;
+}
+
 .memo-container {
-    width:100%;
-    display:flex;
-    justify-content: row;
+    width:70%;
+    margin-left:15% !important;
+    margin-bottom: 100px !important;
+    background-image:url('../img/cork.jpg');
+    background-repeat: repeat;
+    background-size:contain;
+    border: 10px inset rgb(214, 152, 110);
+
 }
 
 
 .memo-body {
-    padding-top:40px;
+    padding-top:50px;
     padding-left:25px;
     padding-right:25px;
     padding-bottom:40px;
@@ -75,11 +89,40 @@ a:hover{
     background-image: url('../img/memo2.png');
     background-position:center;
     background-size:cover;
+    margin:0;
+    position:relative;
+}
+
+.pin {
+    position:absolute;
+    top:20px;
+    left:141px;
+}
+
+.memo-inner {
+    max-height:180px;
+    overflow-y:auto;
+}
+
+.memo-wrapper {
+    display:flex;
+    justify-content: center;
+}
+
+.crud-memo-wrapper {
+    display:block;
+}
+
+.crud-buttons {
+    background-color: rgba(50,50,50,0.8);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .memo-title {
     padding:0;
     margin-bottom:0;
+    word-wrap:break-word;
 }
 
 .memo-text {
@@ -126,6 +169,10 @@ label {
 
 .form-danger:hover, .form-danger:focus{
     background-color:$danger;
+}
+
+.countdown {
+    border:2px $dark solid;
 }
 
 .small-icon {

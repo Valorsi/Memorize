@@ -8,8 +8,6 @@
     <?php include('components/includes.php')?>
 </head>
 <body>
-
-<h1 class="accent m-5">Welcome to Memorize!</h1>
 <div class="d-flex justify-content-center">
     <img src="./img/memorizelogo.png" alt="">
 </div>
@@ -22,7 +20,7 @@
             <input class="mb-4 form-item" type="password" name="password" placeholder="Your Password..." value="">
             <input class="mb-4 form-item" type="submit" name="login">
         </form>
-        <h4>Don't have an Account yet? <a href="http://localhost/memorize/register">Register Here!</a></h4>
+        <h4>Don't have an Account yet? <a href="http://boris.codefactory.live/memorize/register">Register Here!</a></h4>
     </div>
 </div>
 

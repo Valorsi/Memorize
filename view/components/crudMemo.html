@@ -1,19 +1,24 @@
-<div class="memo-wrapper col-lg-4 col-md-6 col-sm-12 col-xl-2">
-    <div class="memo-body">
-        <h4 class="memo-title">
-            {memoTitle}
-        </h4>
-        <p class="memo-text" >{memoText}</p>
+<div class="crud-memo-wrapper col-lg-4 col-md-6 col-sm-12 col-xl-4">
+    <div class="d-flex justify-content-center">
+        <div class="memo-body">
+            <img class="pin" src="http://boris.codefactory.live/memorize/img/pin.png" alt="">
+            <div class="memo-inner">
+                <h4 class="memo-title">
+                    {memoTitle}
+                </h4>
+                <p class="memo-text" >{memoText}</p>
+            </div>
+        </div>
     </div>
     <div class="crud-wrapper">
         <div class="crud-buttons">
-            <a href="https://localhost/memorize/edit-memo?memo={memoId}"> <img class="small-icon" src="./img/memoedit.png" alt=""></a>
-            <a href="https://localhost/memorize/edit-memo?memo={memoId}" class="accent">Edit</a>
+            <a href="https://boris.codefactory.live/memorize/edit-memo?memo={memoId}"> <img class="small-icon" src="./img/memoedit.png" alt=""></a>
+            <a href="https://boris.codefactory.live/memorize/edit-memo?memo={memoId}" class="caution">Edit</a>
         </div>
 
         <div class="crud-buttons">
-            <a href="https://localhost/memorize/delete-memo?memo={memoId}"><img class="small-icon" src="./img/memodelete.png" alt=""></a>
-            <a href="https://localhost/memorize/delete-memo?memo={memoId}" class="danger">Delete</a>
+            <a href="https://boris.codefactory.live/memorize/delete-memo?memo={memoId}"><img class="small-icon" src="./img/memodelete.png" alt=""></a>
+            <a href="https://boris.codefactory.live/memorize/delete-memo?memo={memoId}" class="danger">Delete</a>
         </div>
     </div>
 </div>

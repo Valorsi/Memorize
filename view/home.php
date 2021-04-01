@@ -8,7 +8,7 @@
 </head>
     <?php include('components/navbar.html')?>
 <body>
-<h1 class="accent m-5">Browse public Memo's</h1>
+<h1 class="accent m-5">Browse public Memos</h1>
 
 </body>
 </html>

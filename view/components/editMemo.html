@@ -2,10 +2,16 @@
 <div class="form-container">
     <div class="form-wrapper">
         <form action="edit-memo?memo={memoId}" method="POST">
-            <label for="title">Memo Title</label>
-            <input class="mb-4 form-item" type="text" name="title" placeholder="Title your Memo..." value="{memoTitle}">
-            <label for="body">Memo Content</label>
-            <textarea class="mb-4 form-item" rows="5" cols="50" name="body" placeholder="Note to self:..." value="">{memoBody}</textarea>
+            <div class="d-flex justify-content-between">
+                <label for="title">Memo Title</label>
+                <input class="countdown" type="text" readonly name="titleCountdown" size="3" value="">
+            </div>
+            <input class="mb-4 form-item" type="text" name="title" placeholder="Title your Memo..." value="{memoTitle}" maxlength="40" onkeydown="limitText(this.form.title, this.form.titleCountdown, 40)" onkeyup="limitText(this.form.title, this.form.titleCountdown, 40)">
+            <div class="d-flex justify-content-between">
+                <label for="body">Memo Content</label>
+                <input class="countdown" type="text" readonly name="bodyCountdown" size="3" value="">
+            </div>
+            <textarea class="mb-4 form-item" rows="5" cols="50" name="body" placeholder="Note to self:..." value="" maxlength="150" onkeydown="limitText(this.form.body, this.form.bodyCountdown, 150)" onkeyup="limitText(this.form.body, this.form.bodyCountdown, 150)">{memoBody}</textarea>
             <label for="audience">Audience</label>
             <select class="mb-4 form-item" name="audience" >
                 <option value="public">Public</option>

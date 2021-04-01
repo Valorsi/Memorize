@@ -8,6 +8,10 @@
 <body>
 <?php include('components/navbar.html')?>
 
+<div class="d-flex justify-content-between">
+    <h1 class="accent m-5">My Profile</h1>
+    <a href="http://boris.codefactory.live/memorize/delete-account" class="accent m-5">Delete Account</a>
+</div>
 
 </body>
 </html>

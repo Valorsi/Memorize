@@ -1,15 +1,16 @@
 <?php
+require_once('controller.php');
 class logout extends Controller {
     
 
     
     // Funktion userLogout
-    // Checks if a POST has been submit for logging out, then logs the user out and resets their login_token
+    // Checks if a POST has been submit for logging out, then deletes the login_token and resets their login_token
     public static function userLogout() {
 
         //Check if user is Logged in
         if (!login::isLoggedIn()){
-            header('location:http://localhost/memorize/home');
+            controller::redirectTo('home');
         }
 
         //Check if user clicked logout
@@ -24,6 +25,7 @@ class logout extends Controller {
                 //set Expired cookie (don't eat or you will get sick)
                 setcookie("MID", '1', time()-3600);
 
+                controller::redirectTo("login");
             }
         }
 

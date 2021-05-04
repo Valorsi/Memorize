@@ -3,9 +3,9 @@
 class database {
 
     public static $host = "localhost";
-    public static $db_name = "boriscod_memorize";
-    public static $username = 'boriscod_borisadmin';
-    public static $password = 'Antegamhsou1!';
+    public static $db_name = "";
+    public static $username = '';
+    public static $password = '';
 
 
     private static function connect() {
